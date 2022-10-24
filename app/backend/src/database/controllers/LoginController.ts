@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import bcryptCompare from '../../utils/Bcrypt';
 import tokenGenerator from '../../utils/TokenGenerator';
 import LoginService from '../services/LoginService';
 
@@ -9,14 +10,19 @@ class LoginController {
     this.loginService = new LoginService();
   }
 
-  async login(req: Request, res: Response) {
+  login = async (req: Request, res: Response) => {
     const { password } = req.body;
     const result = await this.loginService.login(req.body);
+    if (!result) throw new Error('Not found');
+
+    const compare = await bcryptCompare(password, result.password);
+
+    if (!compare) return res.status(401).json({ message: 'Incorrect email or password' });
+
     const token = tokenGenerator(password);
-    if (!result) return res.status(400).json({ message: 'Username or password invalid' });
 
     return res.status(200).json({ token });
-  }
+  };
 }
 
 export default LoginController;
