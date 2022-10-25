@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-// import validateToken from '../../middlewares/validateToken';
 import bcryptCompare from '../../utils/Bcrypt';
 import tokenGenerator from '../../utils/TokenGenerator';
 import LoginService from '../services/LoginService';
@@ -12,7 +11,7 @@ class LoginController {
   }
 
   login = async (req: Request, res: Response) => {
-    const { password } = req.body;
+    const { email, password } = req.body;
     const result = await this.loginService.login(req.body);
     if (!result) throw new Error('Not found');
 
@@ -20,14 +19,23 @@ class LoginController {
 
     if (!compare) return res.status(401).json({ message: 'Incorrect email or password' });
 
-    const token = tokenGenerator(password);
+    const token = tokenGenerator(email);
 
     return res.status(200).json({ token });
   };
 
   getUser = async (req: Request, res: Response) => {
-    const result = await this.loginService.login(req.body);
+    const { verif: { data: { email } } } = req.body;
+
+    const user = {
+      email,
+      password: '',
+    };
+
+    const result = await this.loginService.login(user);
+
     if (!result) throw new Error('Not found');
+
     const payload = {
       role: result.role,
     };

@@ -16,7 +16,6 @@ const searchUser = async (req: Request, res: Response, next: NextFunction) => {
   const user = await loginService.login(req.body);
 
   if (!user) return res.status(401).json({ message: 'Incorrect email or password' });
-
   next();
 };
 
