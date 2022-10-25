@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+// import validateToken from '../../middlewares/validateToken';
 import bcryptCompare from '../../utils/Bcrypt';
 import tokenGenerator from '../../utils/TokenGenerator';
 import LoginService from '../services/LoginService';
@@ -22,6 +23,15 @@ class LoginController {
     const token = tokenGenerator(password);
 
     return res.status(200).json({ token });
+  };
+
+  getUser = async (req: Request, res: Response) => {
+    const result = await this.loginService.login(req.body);
+    if (!result) throw new Error('Not found');
+    const payload = {
+      role: result.role,
+    };
+    return res.status(200).json({ role: payload.role });
   };
 }
 
