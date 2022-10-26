@@ -3,10 +3,10 @@ import validateToken from '../../middlewares/validateToken';
 import LoginController from '../controllers/LoginController';
 import { searchUser, validateFields } from '../../middlewares/login';
 
-const loginController = new LoginController();
 const LoginRouter = Router();
+const { login, getUser } = new LoginController();
 
-LoginRouter.post('/', validateFields, searchUser, loginController.login);
-LoginRouter.get('/validate', validateToken, loginController.getUser);
+LoginRouter.post('/', validateFields, searchUser, login);
+LoginRouter.get('/validate', validateToken, getUser);
 
 export default LoginRouter;
