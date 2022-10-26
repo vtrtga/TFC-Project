@@ -3,7 +3,12 @@ import Teams from '../models/Teams';
 
 class MatchService {
   public getAll = async () => Match.findAll({
-    include: [{ model: Teams, as: 'teamHome' }, { model: Teams, as: 'teamAway' }],
+    include: [{ model: Teams,
+      as: 'teamHome',
+      attributes: { exclude: ['id'] } },
+    { model: Teams,
+      as: 'teamAway',
+      attributes: { exclude: ['id'] } }],
   });
 }
 

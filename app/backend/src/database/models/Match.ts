@@ -1,5 +1,4 @@
-import { BOOLEAN, INTEGER } from 'sequelize';
-import { Model } from 'sequelize/types';
+import { BOOLEAN, INTEGER, Model } from 'sequelize';
 import db from '.';
 import Teams from './Teams';
 

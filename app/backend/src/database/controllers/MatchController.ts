@@ -9,8 +9,8 @@ class MatchController {
   }
 
   getAll = async (_req: Request, res: Response) => {
-    const matches = this.matchService.getAll();
-
+    const matches = await this.matchService.getAll();
+    console.log(matches);
     return res.status(200).json(matches);
   };
 }

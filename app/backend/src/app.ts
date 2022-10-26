@@ -1,6 +1,6 @@
 import * as express from 'express';
 import LoginRouter from './database/routers/LoginRouter';
-import MatchRouter from './database/routers/MatchesRouter';
+import MatchRouter from './database/routers/MatchRouter';
 import TeamsRouter from './database/routers/TeamsRouter';
 
 class App {
