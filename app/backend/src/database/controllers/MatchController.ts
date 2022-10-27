@@ -20,8 +20,10 @@ class MatchController {
     return res.status(200).json(fullMatches);
   };
 
-  create = async () => {
+  create = async (req: Request, res: Response) => {
+    const newMatch = this.matchService.create(req.body);
 
+    return res.status(201).json(newMatch);
   };
 }
 
