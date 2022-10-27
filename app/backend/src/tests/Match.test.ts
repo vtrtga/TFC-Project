@@ -7,6 +7,7 @@ import { Response } from 'superagent';
 import Match from '../database/models/Match';
 import { allMatches, inProgressMatches, newMatch, outOfProgressMatches }from './mocks/MatchMock';
 import { userValidLogin } from './mocks/LoginMocks';
+import { request } from 'http';
 
 chai.use(chaiHttp);
 
@@ -52,7 +53,7 @@ describe('Testando metodo get da rota /matches', function() {
 });
 
 describe('Testando metodo post da rota /matches', function () {
-  let chaiHttpResponse;
+  let chaiHttpResponse: Response;
   it('Testa se é possivel cadastrar partida com sucesso', async function() {
     const { body: { token } } = await chai
     .request(app)
@@ -73,3 +74,16 @@ describe('Testando metodo post da rota /matches', function () {
     (Match.create as sinon.SinonStub).restore();
   });
 });
+
+describe('Testando método put da rota /matches/:id/finished', function() {
+  let chaiHttpResponse: Response;
+  it('Testa se é possível atualizar o campo inProgress de uma partida', async function() {
+    sinon.stub(Match, 'update');
+    chaiHttpResponse = await chai
+    .request(app)
+    .put('/matches/1/finished')
+
+    expect(chaiHttpResponse.status).to.be.eq(200);
+    expect(chaiHttpResponse.body).to.be.deep.equal({ message: "Finished" });
+  });
+})
