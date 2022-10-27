@@ -14,7 +14,7 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
     const verif: string | Jwt.JwtPayload = Jwt.verify(authorization, secret);
     req.body = { ...req.body, verif };
   } catch (error) {
-    return res.status(401).json({ message: 'Expired or invalid token' });
+    return res.status(401).json({ message: 'Token must be a valid token' });
   }
   next();
 };

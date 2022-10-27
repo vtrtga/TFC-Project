@@ -28,6 +28,13 @@ class MatchController {
     const newMatch = await this.matchService.create(payload, true);
     return res.status(201).json(newMatch);
   };
+
+  update = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const numberId = Number(id);
+    await this.matchService.update(numberId, false);
+    return res.status(200).json({ message: 'Finished' });
+  };
 }
 
 export default MatchController;

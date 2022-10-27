@@ -33,6 +33,11 @@ class MatchService {
     const matches = await this.getAll();
     return inProgressFilter(matches, query);
   };
+
+  update = async (id: number, value: boolean) => Match.update(
+    { inProgress: value },
+    { where: { id } },
+  );
 }
 
 export default MatchService;
