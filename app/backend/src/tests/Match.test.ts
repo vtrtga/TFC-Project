@@ -81,7 +81,7 @@ describe('Testando método put da rota /matches/:id/finished', function() {
     sinon.stub(Match, 'update');
     chaiHttpResponse = await chai
     .request(app)
-    .put('/matches/1/finished')
+    .patch('/matches/1/finished')
 
     expect(chaiHttpResponse.status).to.be.eq(200);
     expect(chaiHttpResponse.body).to.be.deep.equal({ message: "Finished" });
