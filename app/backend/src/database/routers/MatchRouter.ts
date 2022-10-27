@@ -11,6 +11,6 @@ MatchRouter.get('/', getAll);
 
 MatchRouter.post('/', validateToken, blockEqualTeamsRequest, blockNonexistentTeam, create);
 
-MatchRouter.put('/:id/finished', update);
+MatchRouter.patch('/:id/finish', update);
 
 export default MatchRouter;
