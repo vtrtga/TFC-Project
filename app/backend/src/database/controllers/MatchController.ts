@@ -19,6 +19,10 @@ class MatchController {
 
     return res.status(200).json(fullMatches);
   };
+
+  create = async () => {
+
+  };
 }
 
 export default MatchController;
