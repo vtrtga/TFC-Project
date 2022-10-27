@@ -12,6 +12,11 @@ class MatchService {
       attributes: { exclude: ['id'] } }],
   });
 
+  // public create = async (homeTeam: number, awayTeam: number, homeTeamGoals: number, awayTeamGoals: number) =>
+  // Match.create({
+  //   homeTeam:
+  // })
+
   getByCurrentProgress = async (query: any) => {
     const matches = await this.getAll();
     return inProgressFilter(matches, query);
