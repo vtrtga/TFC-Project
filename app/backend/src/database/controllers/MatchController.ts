@@ -21,8 +21,11 @@ class MatchController {
   };
 
   create = async (req: Request, res: Response) => {
-    const newMatch = this.matchService.create(req.body);
-
+    const { homeTeam, awayTeam, homeTeamGoals, awayTeamGoals } = req.body;
+    const payload = {
+      homeTeam, awayTeam, homeTeamGoals, awayTeamGoals,
+    };
+    const newMatch = await this.matchService.create(payload);
     return res.status(201).json(newMatch);
   };
 }

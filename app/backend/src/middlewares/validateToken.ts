@@ -12,9 +12,7 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const verif: string | Jwt.JwtPayload = Jwt.verify(authorization, secret);
-    req.body = {
-      verif,
-    };
+    req.body = { ...req.body, verif };
   } catch (error) {
     return res.status(401).json({ message: 'Expired or invalid token' });
   }
