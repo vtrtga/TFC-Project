@@ -13,16 +13,20 @@ class MatchService {
       attributes: { exclude: ['id'] } }],
   });
 
-  public create = async ({
-    homeTeam,
-    awayTeam,
-    homeTeamGoals,
-    awayTeamGoals }: INewMatch) =>
+  public create = async (
+    {
+      homeTeam,
+      awayTeam,
+      homeTeamGoals,
+      awayTeamGoals }: INewMatch,
+    inProgress: boolean,
+  ) =>
     Match.create({
       homeTeam,
       awayTeam,
       homeTeamGoals,
       awayTeamGoals,
+      inProgress,
     });
 
   getByCurrentProgress = async (query: any) => {

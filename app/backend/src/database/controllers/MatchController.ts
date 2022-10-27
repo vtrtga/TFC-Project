@@ -25,7 +25,7 @@ class MatchController {
     const payload = {
       homeTeam, awayTeam, homeTeamGoals, awayTeamGoals,
     };
-    const newMatch = await this.matchService.create(payload);
+    const newMatch = await this.matchService.create(payload, true);
     return res.status(201).json(newMatch);
   };
 }

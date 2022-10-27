@@ -14,6 +14,7 @@ class Match extends Model {
 Match.init({
   id: {
     type: INTEGER,
+    autoIncrement: true,
     allowNull: false,
     primaryKey: true,
   },
