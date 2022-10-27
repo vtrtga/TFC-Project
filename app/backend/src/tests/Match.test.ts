@@ -6,6 +6,7 @@ import { app } from '../app';
 import { Response } from 'superagent';
 import Match from '../database/models/Match';
 import { allMatches, inProgressMatches, newMatch, outOfProgressMatches }from './mocks/MatchMock';
+import { userValidLogin } from './mocks/LoginMocks';
 
 chai.use(chaiHttp);
 
@@ -53,11 +54,17 @@ describe('Testando metodo get da rota /matches', function() {
 describe('Testando metodo post da rota /matches', function () {
   let chaiHttpResponse;
   it('Testa se é possivel cadastrar partida com sucesso', async function() {
+    const { body: { token } } = await chai
+    .request(app)
+    .post('/login')
+    .send(userValidLogin);
+
     sinon.stub(Match, 'create').resolves(newMatch as Match);
 
     chaiHttpResponse = await chai
     .request(app)
     .post('/matches')
+    .set("authorization", token)
     .send(newMatch);
 
     expect(chaiHttpResponse.status).to.be.eq(201);
