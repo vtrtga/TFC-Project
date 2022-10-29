@@ -5,7 +5,7 @@ import MatchController from '../controllers/MatchController';
 
 const MatchRouter = Router();
 
-const { getAll, create, update } = new MatchController();
+const { getAll, create, update, updateMatchResult } = new MatchController();
 
 MatchRouter.get('/', getAll);
 
@@ -13,6 +13,6 @@ MatchRouter.post('/', validateToken, blockEqualTeamsRequest, blockNonexistentTea
 
 MatchRouter.patch('/:id/finish', update);
 
-MatchRouter.patch('/:id');
+MatchRouter.patch('/:id', updateMatchResult);
 
 export default MatchRouter;
