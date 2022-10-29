@@ -13,4 +13,6 @@ MatchRouter.post('/', validateToken, blockEqualTeamsRequest, blockNonexistentTea
 
 MatchRouter.patch('/:id/finish', update);
 
+MatchRouter.patch('/:id');
+
 export default MatchRouter;

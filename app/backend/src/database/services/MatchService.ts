@@ -38,6 +38,11 @@ class MatchService {
     { inProgress: value },
     { where: { id } },
   );
+
+  updateMatchResult = (id: number, homeTeamGoals: number, awayTeamGoals: number) => Match.update(
+    { homeTeamGoals, awayTeamGoals },
+    { where: { id } },
+  );
 }
 
 export default MatchService;
